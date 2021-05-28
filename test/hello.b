@@ -1,8 +1,3 @@
-[
-    Copyright (c) 2021 Wikipedia contributors
-    Available under CC BY-SA 3.0.
-]
-
 [ This program prints "Hello World!" and a newline to the screen, its
   length is 106 active command characters. [It is not the shortest.]
 
