@@ -3,22 +3,18 @@
 
 #include <stdio.h>
 
-// interpret.c begin
+typedef struct SourceFile {
+    size_t line_count;
+    char **lines;
+} SourceFile;
 
-void interpret(FILE *file);
-
-// end interpret.c
-
-// io.c begin
-
-char *read_source(FILE *file);
-
-// end io.c
-
-// stack.c begin
+typedef struct FilePosition {
+    size_t line;
+    size_t column;
+} FilePosition;
 
 typedef struct StackNode {
-    size_t val;
+    FilePosition val;
     struct StackNode *next;
 } StackNode;
 
@@ -27,9 +23,31 @@ typedef struct Stack {
     size_t size;
 } Stack;
 
-void push(Stack *s, size_t val);
+// error.c begin
+
+void error(SourceFile *source, size_t line, size_t column, const char *msg);
+void cleanup_source(SourceFile *source);
+void cleanup_stack(Stack *s);
+
+// end error.c
+
+// interpret.c begin
+
+void interpret(SourceFile *source);
+
+// end interpret.c
+
+// io.c begin
+
+SourceFile *read_source(FILE *file);
+
+// end io.c
+
+// stack.c begin
+
+void push(Stack *s, size_t line, size_t column);
 void pop(Stack *s);
-size_t peek(const Stack *s);
+FilePosition peek(const Stack *s);
 
 // end stack.c
 

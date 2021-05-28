@@ -24,8 +24,9 @@ int main(int argc, char **argv) {
             fprintf(stderr, "%s: cannot open file.", argv[1]);
             exit(EXIT_FAILURE);
         }
-        interpret(file);
+        SourceFile *source = read_source(file);
         fclose(file);
+        interpret(source);
     }
 
     return 0;

@@ -1,26 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include <string.h>
 
 #include "brainfuck.h"
 
-static size_t get_destination(const char *source, size_t in);
+static FilePosition get_destination(const SourceFile *source, size_t line, size_t column);
 
-void interpret(FILE *file) {
-    char *source = read_source(file);
-    if (source == NULL) {
-        fprintf(stderr, "Error: the number of commands '[' and ']' do not match.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    // for debugging
-    // {
-    //     printf("%s\n", source);
-    //     size_t n = strlen(source);
-    //     for (int i = 0; i < n / 10; ++i) printf("%-2d   .    ", i);
-    //     printf("\n");
-    // }
-
+void interpret(SourceFile *source) {
     unsigned char a[30000] = {0};
     size_t p = 0;
 
@@ -28,81 +13,95 @@ void interpret(FILE *file) {
     s->top = NULL;
     s->size = 0;
 
-    for (size_t i = 0; source[i]; ++i) {
-        switch (source[i]) {
-            case '>': {
-                ++p;
-                if (p == 30000) {
-                    fprintf(stderr, "Error: incrementing pointer to inaccessible cell.\n");
-                    while (s->size) pop(s);
-                    free(s);
-                    free(source);
-                    exit(EXIT_FAILURE);
-                }
-                break;
-            }
-            case '<': {
-                --p;
-                if (p == -1) {
-                    fprintf(stderr, "Error: decrementing pointer to inaccessible cell.\n");
-                    while (s->size) pop(s);
-                    free(s);
-                    free(source);
-                    exit(EXIT_FAILURE);
-                }
-                break;
-            }
-            case '+': {
-                ++a[p];
-                break;
-            }
-            case '-': {
-                --a[p];
-                break;
-            }
-            case '.': {
-                putchar(a[p]);
-                break;
-            }
-            case ',': {
-                a[p] = getchar();
-                break;
-            }
-            case '[': {
-                if (a[p] == 0) {
-                    i = get_destination(source, i);
-                } else {
-                    push(s, i);
-                }
-                break;
-            }
-            case ']': {
-                if (a[p] != 0) {
-                    i = peek(s);
-                } else {
-                    pop(s);
-                }
-                break;
-            }
-            default: {
-                break;
+    for (size_t i = 0; i < source->line_count; ++i) {
+        for (size_t j = 0; source->lines[i][j] != '\0'; ++j) {
+            switch (source->lines[i][j]) {
+                case '>':
+                    ++p;
+                    if (p == 30000) {
+                        error(source, i, j, "incrementing pointer to inaccessible cell.");
+                        cleanup_stack(s);
+                        cleanup_source(source);
+                        exit(EXIT_FAILURE);
+                    }
+                    break;
+                case '<':
+                    --p;
+                    if (p == -1) {
+                        error(source, i, j, "decrementing pointer to inaccessible cell.");
+                        cleanup_stack(s);
+                        cleanup_source(source);
+                        exit(EXIT_FAILURE);
+                    }
+                    break;
+                case '+':
+                    ++a[p];
+                    break;
+                case '-':
+                    --a[p];
+                    break;
+                case '.':
+                    putchar(a[p]);
+                    break;
+                case ',':
+                    a[p] = getchar();
+                    break;
+                case '[':
+                    if (a[p] == 0) {
+                        FilePosition dest = get_destination(source, i, j);
+                        if (dest.line == source->line_count) {
+                            error(source, i, j, "could not find matching instruction ']'.");
+                            cleanup_stack(s);
+                            cleanup_source(source);
+                            exit(EXIT_FAILURE);
+                        }
+                        i = dest.line, j = dest.column;
+                    } else {
+                        push(s, i, j);
+                    }
+                    break;
+                case ']':
+                    if (a[p] != 0) {
+                        FilePosition dest = peek(s);
+                        i = dest.line, j = dest.column;
+                    } else {
+                        pop(s);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
 
-    while (s->size) pop(s);
-    free(s);
-    free(source);
+    if (s->size != 0) {
+        FilePosition top = peek(s);
+        error(source, top.line, top.column, "unexpected end-of-file -- could not match find matching instruction ']'.");
+        cleanup_stack(s);
+        cleanup_source(source);
+        exit(EXIT_FAILURE);
+    }
+
+    cleanup_stack(s);
+    cleanup_source(source);
 }
 
-static size_t get_destination(const char *source, size_t in) {
-    size_t out = in + 1;
-    for (size_t level = 1; source[out] && level != 0; ++out) {
-        if (source[out] == '[') {
+static FilePosition get_destination(const SourceFile *source, size_t line, size_t column) {
+    if (source->lines[line][++column] == '\0') {
+        ++line, column = 0;
+    }
+
+    for (size_t level = 1; level != 0 && line < source->line_count;) {
+        if (source->lines[line][column] == '[') {
             ++level;
-        } else if (source[out] == ']') {
+        } else if (source->lines[line][column] == ']') {
             --level;
         }
+
+        if (source->lines[line][++column] == '\0') {
+            ++line, column = 0;
+        }
     }
-    return --out;
+
+    return (FilePosition){.line = line, .column = --column};
 }
