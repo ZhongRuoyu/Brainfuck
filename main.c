@@ -39,7 +39,7 @@ static void usage(const char *basename, int is_failure) {
             "    %s {-h|--help}\n"
             "\n"
             "Option:\n"
-            "        <file>  Interpret the brainfuck script given.\n"
+            "        <file>  Interpret the Brainfuck program.\n"
             "    -h, --help  Display this help message.\n"
             "\n",
             basename, basename);
