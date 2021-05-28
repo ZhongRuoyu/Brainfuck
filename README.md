@@ -1,6 +1,6 @@
 # Brainf\*ck
 
-This is a simple [Brainf\*ck](https://en.wikipedia.org/wiki/Brainf*ck) interpreter in C which supports error detection.
+This is a simple [Brainf\*ck](https://en.wikipedia.org/wiki/Brainfuck) interpreter in C which supports error detection.
 
 ## The Language
 
@@ -26,7 +26,7 @@ The eight single-character commands of the language are listed below. All the ot
 | `[`     | If the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jumps it _forward_ to the command after the _matching_ `]` command. |
 | `]`     | If the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jumps it _back_ to the command after the _matching_ `[` command. |
 
-See [Wikipedia](https://en.wikipedia.org/wiki/Brainf*ck) for a more detailed explanation.
+See [Wikipedia](https://en.wikipedia.org/wiki/Brainfuck) for a more detailed explanation.
 
 ## To Build
 
