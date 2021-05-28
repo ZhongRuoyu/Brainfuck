@@ -5,9 +5,9 @@
 
 void error(const SourceFile *source, size_t line, size_t column, const char *msg) {
     fprintf(stderr, "\n");
-    fprintf(stderr, "At Line %d, Column %d: error: %s\n", line + 1, column + 1, msg);
+    fprintf(stderr, "At Line %zu, Column %zu: error: %s\n", line + 1, column + 1, msg);
     fprintf(stderr, "    %s\n", source->lines[line]);
-    fprintf(stderr, "    %*s^\n", column, "");
+    fprintf(stderr, "    %*s^\n", (int)column, "");
     fprintf(stderr, "\n");
 }
 
