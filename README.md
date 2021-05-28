@@ -44,13 +44,31 @@ To use the interpreter, simply supply the path to the Brainf\*ck program as an a
 bf test/hello.b
 ```
 
-... executes the program at [test/hello.b](/test/hello.b), and hence generates the following output:
+... executes the program at [test/hello.b](/test/hello.b), and generates the following output:
 
 ```
 Hello World!
 ```
 
-Run `bf --help` to view the detailed help message.
+The interpreter has the capability to detect and locate runtime errors. For instance, interpreting the following program...
+
+```brainfuck
+        (pointer initially at location 0)
++++++   increment the value at cell 0 to 5
+<       try decrementing the pointer
+>       increment the pointer
+[-]     reset the cell to 0
+```
+
+... generates the following error:
+
+```
+At Line 3, Column 1: error: decrementing pointer to inaccessible cell.
+    <       try decrementing the pointer
+    ^
+```
+
+Run `bf --help` to view the detailed help message on using the interpreter.
 
 ## Licence
 
