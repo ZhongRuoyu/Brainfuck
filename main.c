@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
         SourceFile *source = read_source(file);
         fclose(file);
         interpret(source);
+        cleanup_source(source);
     }
 
     return 0;

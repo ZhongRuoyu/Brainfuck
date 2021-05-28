@@ -83,7 +83,6 @@ void interpret(SourceFile *source) {
     }
 
     cleanup_stack(s);
-    cleanup_source(source);
 }
 
 static FilePosition get_destination(const SourceFile *source, size_t line, size_t column) {
