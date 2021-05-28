@@ -25,7 +25,7 @@ typedef struct Stack {
 
 // error.c begin
 
-void error(SourceFile *source, size_t line, size_t column, const char *msg);
+void error(const SourceFile *source, size_t line, size_t column, const char *msg);
 void cleanup_source(SourceFile *source);
 void cleanup_stack(Stack *s);
 
