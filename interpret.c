@@ -76,7 +76,7 @@ void interpret(SourceFile *source) {
 
     if (s->size != 0) {
         FilePosition top = peek(s);
-        error(source, top.line, top.column, "unexpected end-of-file -- could not match find matching instruction ']'.");
+        error(source, top.line, top.column, "unexpected end-of-file -- could not find matching instruction ']'.");
         cleanup_stack(s);
         cleanup_source(source);
         exit(EXIT_FAILURE);
