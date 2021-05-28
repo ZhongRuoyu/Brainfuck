@@ -1,6 +1,6 @@
 # Brainf\*ck
 
-This is a simple [Brainf\*ck](https://en.wikipedia.org/wiki/Brainfuck) interpreter in C which supports error detection.
+This is a simple [Brainf\*ck](https://en.wikipedia.org/wiki/Brainfuck) interpreter in C which can detect and locate runtime errors.
 
 ## The Language
 
