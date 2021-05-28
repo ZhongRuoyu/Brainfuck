@@ -6,7 +6,7 @@ This directory contains some example programs in Brainf\*ck, which can be used t
 
 | Program                      | Description                                                                     |
 | ---------------------------- | ------------------------------------------------------------------------------- |
-| [dbfi.b](/test/dbfi.b)       | A brainf\*ck interpreter.                                                       |
+| [dbfi.b](/test/dbfi.b)       | A Brainf\*ck interpreter.                                                       |
 | [dquine.b](/test/dquine.b)   | A [quine](<https://en.wikipedia.org/wiki/Quine_(computing)>).                   |
 | [e.b](/test/e.b)             | Computes the transcendental number e.                                           |
 | [fib.b](/test/fib.b)         | Outputs arbitrarily many Fibonacci numbers.                                     |
