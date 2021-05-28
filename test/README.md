@@ -4,15 +4,16 @@ This directory contains some example programs in Brainf\*ck, which can be used t
 
 ## Programs
 
-| Program                      | Description                                                                     |
-| ---------------------------- | ------------------------------------------------------------------------------- |
-| [dbfi.b](/test/dbfi.b)       | A Brainf\*ck interpreter.                                                       |
-| [dquine.b](/test/dquine.b)   | A [quine](<https://en.wikipedia.org/wiki/Quine_(computing)>).                   |
-| [e.b](/test/e.b)             | Computes the transcendental number e.                                           |
-| [fib.b](/test/fib.b)         | Outputs arbitrarily many Fibonacci numbers.                                     |
-| [hello.b](/test/hello.b)     | The ubiquitous "Hello World!"                                                   |
-| [life.b](/test/life.b)       | [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). |
-| [squares.b](/test/squares.b) | Outputs square numbers from 0 to 10000.                                         |
+| Program                          | Description                                                                           |
+| -------------------------------- | ------------------------------------------------------------------------------------- |
+| [dbfi.b](/test/dbfi.b)           | A Brainf\*ck interpreter.                                                             |
+| [dquine.b](/test/dquine.b)       | A [quine](<https://en.wikipedia.org/wiki/Quine_(computing)>).                         |
+| [e.b](/test/e.b)                 | Computes the transcendental number e.                                                 |
+| [fib.b](/test/fib.b)             | Outputs arbitrarily many Fibonacci numbers.                                           |
+| [hello.b](/test/hello.b)         | The ubiquitous "Hello World!"                                                         |
+| [life.b](/test/life.b)           | [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).       |
+| [squares.b](/test/squares.b)     | Outputs square numbers from 0 to 10000.                                               |
+| [tictactoe.b](/test/tictactoe.b) | Plays [tic-tac-toe (noughts and crosses)](https://en.wikipedia.org/wiki/Tic-tac-toe). |
 
 ## Licences
 
@@ -51,4 +52,9 @@ Available under CC BY-SA 4.0.
 ### [squares.b](/test/squares.b)
 
 Copyright (c) Daniel B. Cristofani  
+Available under CC BY-SA 4.0.
+
+### [tictactoe.b](/test/tictactoe.b)
+
+Copyright (c) 2020 Daniel B. Cristofani  
 Available under CC BY-SA 4.0.
