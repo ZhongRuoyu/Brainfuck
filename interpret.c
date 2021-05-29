@@ -61,6 +61,12 @@ void interpret(SourceFile *source) {
                     }
                     break;
                 case ']':
+                    if (s->size == 0) {
+                        error(source, i, j, "could not find matching instruction '['.");
+                        cleanup_stack(s);
+                        cleanup_source(source);
+                        exit(EXIT_FAILURE);
+                    }
                     if (a[p] != 0) {
                         FilePosition dest = peek(s);
                         i = dest.line, j = dest.column;
