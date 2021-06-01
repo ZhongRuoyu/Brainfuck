@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
     } else {
         FILE *file;
         if ((file = fopen(argv[1], "r")) == NULL) {
-            fprintf(stderr, "%s: cannot open file.", argv[1]);
+            fprintf(stderr, "%s: cannot open file.\n", argv[1]);
             exit(EXIT_FAILURE);
         }
         SourceFile *source = read_source(file);
