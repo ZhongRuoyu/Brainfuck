@@ -30,23 +30,38 @@ See [Wikipedia](https://en.wikipedia.org/wiki/Brainfuck) for a more detailed exp
 
 ## To Build
 
-To build the interpreter, simply include all the source files in the root directory. For instance:
+### Building with GNU Make
 
+The interpreter can be built with GNU Make as follows.
+
+```bash
+$ sudo apt install build-essential clang git
+$ git clone https://github.com/ZhongRuoyu/Brainfuck.git
+$ cd Brainfuck
+$ make
 ```
-clang *.c -o bf
+
+The last `make` command generates an executable named `bf` in the working directory.
+
+### Building Manually
+
+On platforms like Windows where `make` is not well supported, the interpreter can still be built manually. To do so, `git clone` this repository or download a zipped archive. Open a terminal in its root directory and build the executable using all the source files in [/src](/src), with include path [/include](/include). For instance, using `clang` on Windows with PowerShell:
+
+```powershell
+clang src/*.c -I include -std=c11 -O2 -o bf.exe
 ```
 
 ## To Use
 
 To use the interpreter, simply supply the path to the Brainf\*ck program as an argument. For instance, running the following...
 
-```
-bf test/hello.b
+```bash
+$ bf test/hello.b
 ```
 
 ... executes the program at [test/hello.b](/test/hello.b), and generates the following output:
 
-```
+```bash
 Hello World!
 ```
 
@@ -62,7 +77,7 @@ The interpreter has the capability to detect and locate runtime errors. For inst
 
 ... generates the following error:
 
-```
+```bash
 At Line 3, Column 1: error: decrementing pointer to inaccessible cell.
     <       try decrementing the pointer
     ^
@@ -70,8 +85,10 @@ At Line 3, Column 1: error: decrementing pointer to inaccessible cell.
 
 Run `bf --help` to view the detailed help message on using the interpreter.
 
+To execute the interpreter, you may need to key in its path as well.
+
 ## Licence
 
 Copyright (c) 2021 Zhong Ruoyu.
 
-Unless otherwise stated, the files in this repository are licensed under the MIT License.
+Unless otherwise stated, the files in this repository are licensed under the [MIT License](/LICENSE).
