@@ -30,7 +30,7 @@ static char *read_line(FILE *file) {
     char *buffer = (char *)malloc(buffer_size * sizeof(char));
     size_t char_count = 0;
 
-    for (char ch; ch = getc(file), ch != '\n' && ch != EOF;) {
+    for (int ch; ch = getc(file), ch != '\n' && ch != EOF;) {
         if (char_count == buffer_size) {
             buffer_size *= 2;
             buffer = (char *)realloc(buffer, buffer_size * sizeof(char));
