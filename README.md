@@ -87,6 +87,10 @@ Run `bf --help` to view the detailed help message on using the interpreter.
 
 To execute the interpreter, you may need to key in its path as well.
 
+## See Also
+
+A [code golf](https://en.wikipedia.org/wiki/Code_golf) version of the interpreter, based on a25de5a7abab05a2f7ea1f2f0bc9bb436e4e4a03, is available [here](https://github.com/ZhongRuoyu/CodeGolf/blob/main/brainfuck/brainfuck.c) in [ZhongRuoyu/CodeGolf](https://github.com/ZhongRuoyu/CodeGolf).
+
 ## Licence
 
 Copyright (c) 2021 Zhong Ruoyu.
