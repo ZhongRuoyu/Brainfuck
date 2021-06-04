@@ -32,16 +32,22 @@ See [Wikipedia](https://en.wikipedia.org/wiki/Brainfuck) for a more detailed exp
 
 ### Building with GNU Make
 
-The interpreter can be built with GNU Make as follows.
+Building the interpreter requires `make`, `clang`, and `git`. To satisfy these requirements, you may need to install them using your package manager first. For instance:
 
 ```bash
-$ sudo apt install build-essential clang git
+$ sudo apt install build-essential clang git  # for Debian, Ubuntu, and related
+$ sudo dnf install make clang git             # for Fedora, Red Hat, and related
+```
+
+Then the interpreter can be built with GNU Make:
+
+```bash
 $ git clone https://github.com/ZhongRuoyu/Brainfuck.git
 $ cd Brainfuck
 $ make
 ```
 
-The last `make` command generates an executable named `bf` in the working directory.
+The last `make` command generates an executable named `bf` in the directory.
 
 ### Building Manually
 
